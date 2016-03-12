@@ -4,7 +4,7 @@ MatterMost Integration Center
 ##
 ```
 +--------------+
-|   githhub    +--------+
+|   github     +--------+
 +--------------+        |          +---------------------+           +------------------------+
                         |          |       MMIC          |           |         MatterMost     |
 +--------------+        +--------> |/github              |     +---> |/gihubChannel           |
