@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/BurntSushi/toml"
 	log "github.com/Sirupsen/logrus"
+	"github.com/eternnoir/mmic/mmic"
 	"github.com/eternnoir/mmic/mmic/config"
 )
 
@@ -27,4 +28,9 @@ func main() {
 		return
 	}
 	fmt.Printf("%#v \n", config)
+	mmic, err := mmic.NewMmic(&config)
+	if err != nil {
+		log.Error(err)
+	}
+	mmic.Start()
 }

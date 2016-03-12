@@ -1,6 +1,6 @@
 package config
 
 type MmicConfig struct {
-	Port              string
-	TrelloIntegration []*TrelloConfig
+	Port          string
+	TrelloConfigs []TrelloConfig
 }

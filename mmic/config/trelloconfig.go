@@ -2,6 +2,6 @@ package config
 
 type TrelloConfig struct {
 	RoutePath    string
-	TargetMM     *TargetMatterMostConfig
+	TargetMM     TargetMatterMostConfig
 	TextTemplate string
 }
