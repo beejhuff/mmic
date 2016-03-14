@@ -4,7 +4,7 @@ type UpdateAction struct {
 	Action Action `json="action"`
 }
 
-func (ua *UpdateAction) GetType() string {
+func (ua UpdateAction) GetType() string {
 	if _, found := ua.Action.Data["listBefore"]; found {
 		return "MoveCard"
 	}
