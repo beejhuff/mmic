@@ -12,6 +12,7 @@ import (
 	"github.com/eternnoir/mmic/mmic/payloads/trello"
 	"github.com/labstack/echo"
 	"net/http"
+	"strings"
 	"text/template"
 )
 
@@ -70,6 +71,9 @@ func (th *TrelloHandler) convertToMMPayload(trelloupdate *trello.UpdateAction) (
 		payload.Username = &mmconfig.Username
 	}
 	textStr := doc.String()
+	if strings.TrimSpace(textStr) == "" {
+		return nil, fmt.Errorf("Nothing to send. %#v", trelloupdate)
+	}
 	payload.Text = &textStr
 
 	return payload, nil
