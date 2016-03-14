@@ -9,7 +9,10 @@ func (ua *UpdateAction) GetType() string {
 		return "MoveCard"
 	}
 	if _, found := ua.Action.Data["old"]; found {
-		return "UpdateCard"
+		if _, title := ua.Action.Data["old"].(map[string]interface{})["name"]; title {
+
+			return "UpdateCard"
+		}
 	}
 	if ua.Action.Type == "createCard" {
 		return "CreateCard"
