@@ -33,6 +33,10 @@ func (th *TrelloHandler) Handle(c echo.Context) error {
 		return err
 	}
 	log.Infof("TrelloHandler get new update %#v", trelloUpdate)
+	if trelloUpdate.GetType() == "" {
+		log.Infof("Not Support type. %#v", trelloUpdate)
+		return c.String(http.StatusOK, "")
+	}
 	payload, err := th.convertToMMPayload(trelloUpdate)
 	if err != nil {
 		log.Errorf("Convert payload fail.%s", err)
