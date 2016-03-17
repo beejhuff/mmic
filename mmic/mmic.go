@@ -10,6 +10,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
+	"net/http"
 )
 
 type Mmic struct {
@@ -48,6 +49,7 @@ func (mmic *Mmic) bindTrelloHandlers(configs []config.TrelloConfig) error {
 		th := trello.NewTrelloHandler(config)
 		log.Debugf("Bind %#v", config)
 		mmic.HttpServer.Post(config.RoutePath, th)
+		mmic.HttpServer.Head(config.RoutePath, emptyHandler())
 		mmic.RouteMap[config.RoutePath] = th
 	}
 	return nil
@@ -57,4 +59,10 @@ func (mmic *Mmic) Start() {
 	mmic.HttpServer.Use(middleware.Logger())
 	mmic.HttpServer.Use(middleware.Recover())
 	mmic.HttpServer.Run(standard.New(":" + mmic.Port))
+}
+
+func emptyHandler() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hi")
+	}
 }
