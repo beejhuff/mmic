@@ -7,6 +7,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/eternnoir/mmic/mmic"
 	"github.com/eternnoir/mmic/mmic/config"
+	"os"
 )
 
 func main() {
@@ -27,6 +28,11 @@ func main() {
 		fmt.Println(err)
 		return
 	}
+	port := os.Getenv("PORT")
+	if port != "" {
+		config.Port = port
+	}
+
 	fmt.Printf("%#v \n", config)
 	mmic, err := mmic.NewMmic(&config)
 	if err != nil {
